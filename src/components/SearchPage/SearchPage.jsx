@@ -3,7 +3,7 @@ import PhotosContainer from "../PhotosContainer";
 const SearchPage = () => {
   return (
     <div>
-      <PhotosContainer />
+      {/* <PhotosContainer /> */}
     </div>
 
   )

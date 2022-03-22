@@ -26,9 +26,9 @@ const RandomPhotosContextProvider = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    const data = localStorage.getItem('randomPhotos')
-    if (data) {
-      const parsedData = JSON.parse(data)
+    const localStorageData = localStorage.getItem('randomPhotos')
+    if (localStorageData) {
+      const parsedData = JSON.parse(localStorageData)
 
       if (new Date(parsedData.date).getUTCDate() === new Date().getUTCDate()) {
         setData(parsedData)

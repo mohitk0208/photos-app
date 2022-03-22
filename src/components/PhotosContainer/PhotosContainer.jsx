@@ -1,5 +1,6 @@
 import { useState } from "react"
 import PhotoModal from "../PhotoModal/PhotoModal"
+import Photo from "./Photo"
 
 const PhotosContainer = ({ photos, loading }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(-1)
@@ -16,11 +17,8 @@ const PhotosContainer = ({ photos, loading }) => {
         ))
       ) : (
         photos.map((photo, index) => (
-          <div className="w-full aspect-square bg-gray-400 rounded-sm cursor-pointer overflow-hidden" key={index} onClick={() => setCurrentImageIndex(index)} >
-            <img className="w-full h-full hover:scale-110 transition-transform duration-200 ease-in-out object-cover" src={photo.urls.regular} alt="" />
-          </div>
-        )
-        )
+          <Photo photo={photo} onClick={() => setCurrentImageIndex(index)} />
+        ))
       )
       }
 

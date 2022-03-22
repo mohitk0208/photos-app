@@ -56,7 +56,7 @@ const HomePage = () => {
           <RefreshIcon className="w-6 h-6 text-blue-600" />
         </button>
       </div>
-      <PhotosContainer photos={photos} />
+      <PhotosContainer photos={photos} loading={loading} />
     </div>
   )
 

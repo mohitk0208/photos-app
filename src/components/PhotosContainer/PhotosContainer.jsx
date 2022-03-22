@@ -1,7 +1,7 @@
 import { useState } from "react"
 import PhotoModal from "../PhotoModal/PhotoModal"
 
-const PhotosContainer = ({ photos }) => {
+const PhotosContainer = ({ photos, loading }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(-1)
 
 
@@ -9,12 +9,20 @@ const PhotosContainer = ({ photos }) => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2" >
-      {photos.map((photo, index) => (
-        <div className="w-full aspect-square bg-gray-400 rounded-sm cursor-pointer overflow-hidden" key={index} onClick={() => setCurrentImageIndex(index)} >
-          <img className="w-full h-full hover:scale-110 transition-transform duration-200 ease-in-out object-cover" src={photo.urls.regular} alt="" />
-        </div>
+      {loading ? (
+        Array(30).fill(0).map((_, index) => (
+          <div className="w-full aspect-square bg-gray-400 animate-pulse" key={index}>
+          </div>
+        ))
+      ) : (
+        photos.map((photo, index) => (
+          <div className="w-full aspect-square bg-gray-400 rounded-sm cursor-pointer overflow-hidden" key={index} onClick={() => setCurrentImageIndex(index)} >
+            <img className="w-full h-full hover:scale-110 transition-transform duration-200 ease-in-out object-cover" src={photo.urls.regular} alt="" />
+          </div>
+        )
+        )
       )
-      )}
+      }
 
       {currentImageIndex !== -1 && (
         <PhotoModal

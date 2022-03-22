@@ -1,11 +1,14 @@
 import TabsContainer from "./components/TabsContainer"
+import RandomPhotosContextProvider from "./context/RandomPhotosContext"
 
 function App() {
 
   return (
-    <div className="">
-      <TabsContainer />
-    </div>
+    <RandomPhotosContextProvider >
+      <div className="">
+        <TabsContainer />
+      </div>
+    </RandomPhotosContextProvider>
   )
 }
 

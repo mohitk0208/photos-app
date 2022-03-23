@@ -1,13 +1,20 @@
 import { Dialog, Transition } from '@headlessui/react'
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid"
 
-/**
- *
- * @param {{size:"sm" | "md" | "lg" | "xl"}} param0
- * @returns
- */
-const PhotoModal = ({ show, onClose, className, size = "md", currentImgUrl, onNextClick, onPrevClick }) => {
+
+interface PhotoModalProps {
+  show: boolean,
+  className: string,
+  size?: "sm" | "md" | "lg" | "xl" | "2xl",
+  currentImgUrl: string,
+  onClose: () => void,
+  onNextClick: () => void,
+  onPrevClick: () => void,
+}
+
+
+const PhotoModal = ({ size = "md", ...props }: PhotoModalProps) => {
 
   const MODAL_WIDTH = {
     "sm": "max-w-md",
@@ -19,13 +26,13 @@ const PhotoModal = ({ show, onClose, className, size = "md", currentImgUrl, onNe
 
 
   return (
-    <Transition show={show} as={Fragment} >
+    <Transition show={props.show} as={Fragment} >
       <Dialog
         as="div"
         static
         className="fixed z-10 inset-0 overflow-y-auto"
-        open={show}
-        onClose={onClose}
+        open={props.show}
+        onClose={props.onClose}
       >
         <div className="min-h-screen text-center flex items-center justify-center">
           <Transition.Child
@@ -54,15 +61,15 @@ const PhotoModal = ({ show, onClose, className, size = "md", currentImgUrl, onNe
             leaveTo="opacity-0 -translate-y-8 sm-translate-y-0 sm:scale-95"
           >
             <div className={`transition-all transform shadow-xl rounded-lg mx-auto max-h-[90vh] max-w-[80vw] align-middle`}>
-              <div className={`max-w-[80vw] h-[90vh] ${className}`}>
-                <img className=' aspect-auto h-full object-contain select-none' src={currentImgUrl} />
+              <div className={`max-w-[80vw] h-[90vh] ${props.className}`}>
+                <img className=' aspect-auto h-full object-contain select-none' src={props.currentImgUrl} />
               </div>
             </div>
           </Transition.Child>
 
-          <ChevronLeftIcon className="fixed left-10 top-1/2 -translate-y-1/2 w-20 bg-white rounded-full cursor-pointer opacity-50 hover:opacity-70 transition-opacity duration-200 ease-in-out select-none" onClick={onPrevClick} />
+          <ChevronLeftIcon className="fixed left-10 top-1/2 -translate-y-1/2 w-20 bg-white rounded-full cursor-pointer opacity-50 hover:opacity-70 transition-opacity duration-200 ease-in-out select-none" onClick={props.onPrevClick} />
 
-          <ChevronRightIcon className="fixed right-10 top-1/2 -translate-y-1/2 w-20 bg-white rounded-full cursor-pointer opacity-50 hover:opacity-70 transition-opacity duration-200 ease-in-out select-none " onClick={onNextClick} />
+          <ChevronRightIcon className="fixed right-10 top-1/2 -translate-y-1/2 w-20 bg-white rounded-full cursor-pointer opacity-50 hover:opacity-70 transition-opacity duration-200 ease-in-out select-none " onClick={props.onNextClick} />
 
         </div>
 

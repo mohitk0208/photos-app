@@ -5,7 +5,12 @@ import SavedPage from "../SavedPage"
 import { HomeIcon, SearchIcon, BookmarkIcon } from "@heroicons/react/solid"
 
 
-const CustomTab = ({ Icon, name }) => {
+interface CustomTabProps {
+  Icon: (props: React.ComponentProps<"svg">) => JSX.Element;
+  name: string;
+}
+
+const CustomTab = ({ Icon, name }: CustomTabProps) => {
   return (
     <Tab>
       {({ selected }) => (

@@ -1,6 +1,7 @@
-import { useContext, createContext, useState, useEffect, useCallback } from "react"
+import { useContext, createContext, useState, useEffect, useCallback, ReactNode } from "react"
+import { randomPhotosContext, RandomPhotosDataType, setLocalStorageDataType } from "../types/context"
 
-const RandomPhotosContext = createContext()
+const RandomPhotosContext = createContext<randomPhotosContext>({ data: null, setLocalStorageData: () => { } })
 
 export const useRandomPhotosContext = () => {
   const context = useContext(RandomPhotosContext)
@@ -12,18 +13,18 @@ export const useRandomPhotosContext = () => {
 
 
 
-const RandomPhotosContextProvider = ({ children }) => {
+const RandomPhotosContextProvider = ({ children }: { children: ReactNode }) => {
 
-  const [data, setData] = useState(null)
+  const [data, setData] = useState<RandomPhotosDataType | null>(null)
 
-  const setLocalStorageData = useCallback((photos) => {
+  const setLocalStorageData: setLocalStorageDataType = (photos) => {
     const d = {
       date: new Date(),
       photos: photos
     }
     localStorage.setItem('randomPhotos', JSON.stringify(d))
     setData(d)
-  }, [])
+  }
 
   useEffect(() => {
     const localStorageData = localStorage.getItem('randomPhotos')
@@ -36,7 +37,7 @@ const RandomPhotosContextProvider = ({ children }) => {
     }
   }, [])
 
-  const value = {
+  const value: randomPhotosContext = {
     data,
     setLocalStorageData
   }

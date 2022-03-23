@@ -1,11 +1,12 @@
 // import { useSavedPhotos } from "../../context/SavedPhotosContext"
 // import { BookmarkIcon } from "@heroicons/react/outline"
-import { Random } from "unsplash-js/dist/methods/photos/types"
+
+import { PhotoType } from '../../types/photo'
 
 
 interface PhotoProps {
   onClick: () => void,
-  photo: Random
+  photo: PhotoType
 }
 
 const Photo = ({ photo, onClick }: PhotoProps) => {

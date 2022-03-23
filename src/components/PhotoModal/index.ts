@@ -1,3 +1,3 @@
 import PhotoModal from "./PhotoModal";
 
-export default photoModal;
+export default PhotoModal;

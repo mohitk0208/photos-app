@@ -1,9 +1,16 @@
+import PhotosContainer from "../PhotosContainer"
+import { useSavedPhotos } from "../../context/SavedPhotosContext"
+
+
 const SavedPage = () => {
+  const { data, photos, removeFromSavedPhotos } = useSavedPhotos()
+
+
   return (
-    <div>
-      <h1>Saved Page</h1>
+    <div className="" >
+      <PhotosContainer photos={photos} loading={false} />
     </div>
-  );
+  )
 }
 
 export default SavedPage;

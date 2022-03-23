@@ -15,8 +15,6 @@ const HomePage = () => {
   const [loading, setLoading] = useState(false)
   const { data, setLocalStorageData } = useRandomPhotosContext()
 
-
-
   useEffect(() => {
 
     if (data) {

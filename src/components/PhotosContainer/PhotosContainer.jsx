@@ -17,7 +17,7 @@ const PhotosContainer = ({ photos, loading }) => {
         ))
       ) : (
         photos.map((photo, index) => (
-          <Photo photo={photo} onClick={() => setCurrentImageIndex(index)} />
+          <Photo photo={photo} onClick={() => setCurrentImageIndex(index)} key={photo.id} />
         ))
       )
       }

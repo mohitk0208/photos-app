@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect, useCallback } from "rea
 
 const SavedPhotosContext = createContext()
 
-const useSavedPhotos = () => {
+export const useSavedPhotos = () => {
   const context = useContext(SavedPhotosContext)
   if (context === undefined) {
     throw new Error("useSavedPhotos must be used within a SavedPhotosProvider")
@@ -14,41 +14,35 @@ const useSavedPhotos = () => {
 const SavedPhotosContextProvider = ({ children }) => {
 
   const [data, setData] = useState(null)
-  const [savedIds, setSavedIds] = useState(new Set())
-
+  const [savedIds, setSavedIds] = useState([])
+  const [photos, setPhotos] = useState([])
 
   const addToSavedPhotos = useCallback((photo) => {
     const d = {
-      ...data,
-      [photo.id]: photo
+      ...data
     }
+
+    d[photo.id] = photo
 
     localStorage.setItem('savedPhotos', JSON.stringify(d))
     setData(d)
-    setSavedIds(prev => {
-      prev.add(photo.id)
-
-      return prev
-    })
+    setSavedIds(Object.keys(d))
+    setPhotos(Object.values(d))
   }, [])
 
 
 
 
   const removeFromSavedPhotos = useCallback((photo) => {
-    const d = {
-      ...data
-    }
+    console.log('removing from saved photos')
 
-    delete d[photo.id]
+
+    const { [photo.id]: _, ...d } = data
 
     localStorage.setItem('savedPhotos', JSON.stringify(d))
     setData(d)
-    setSavedIds(prev => {
-      prev.delete(photo.id)
-
-      return prev
-    })
+    setSavedIds(Object.keys(d))
+    setPhotos(Object.values(d))
   }, [])
 
 
@@ -58,24 +52,20 @@ const SavedPhotosContextProvider = ({ children }) => {
     if (localStorageData) {
       const parsedData = JSON.parse(localStorageData)
 
+      console.log('parsed data', parsedData)
       setData(parsedData)
-      setSavedIds(prev => {
-        const set = new Set()
-        Object.keys(parsedData).forEach(key => {
-          set.add(key)
-        })
-
-        return set
-      })
+      setSavedIds(prev => Object.keys(parsedData))
+      setPhotos(Object.values(parsedData))
     }
 
   }, [])
 
   const value = {
     data,
+    savedIds,
+    photos,
     addToSavedPhotos,
     removeFromSavedPhotos,
-    savedIds
   }
 
   return (

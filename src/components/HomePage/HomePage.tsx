@@ -3,6 +3,7 @@ import PhotosContainer from "../PhotosContainer"
 import { createApi } from "unsplash-js"
 import { useRandomPhotosContext } from "../../context/RandomPhotosContext"
 import { RefreshIcon } from "@heroicons/react/solid"
+import { PhotoType } from "../../types/photo"
 
 const api = createApi({
   accessKey: import.meta.env.VITE_UNSPLASH_ACCESS_KEY,
@@ -11,7 +12,7 @@ const api = createApi({
 
 const HomePage = () => {
 
-  const [photos, setPhotos] = useState([])
+  const [photos, setPhotos] = useState<PhotoType[]>([])
   const [loading, setLoading] = useState(false)
   const { data, setLocalStorageData } = useRandomPhotosContext()
 
@@ -25,14 +26,14 @@ const HomePage = () => {
       api.photos.getRandom({
         count: 30,
       }).then(res => {
-        setLocalStorageData(res.response)
+        setLocalStorageData(res.response as PhotoType | PhotoType[] || [])
       })
     }
 
   }, [])
 
   useEffect(() => {
-    setPhotos(data.photos)
+    if (data) setPhotos(data.photos)
   }, [data])
 
   const refreshClickHandler = () => {
@@ -40,7 +41,7 @@ const HomePage = () => {
     api.photos.getRandom({
       count: 30,
     }).then(res => {
-      setLocalStorageData(res.response)
+      setLocalStorageData(res.response as PhotoType | PhotoType[] || [])
       setLoading(false)
     })
   }

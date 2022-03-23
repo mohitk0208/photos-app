@@ -5,7 +5,7 @@ export interface RandomPhotosDataType {
   photos: PhotoType[];
 }
 
-export type setLocalStorageDataType = (photo: PhotoType[]) => void;
+export type setLocalStorageDataType = (photo: PhotoType | PhotoType[]) => void;
 
 export interface randomPhotosContext {
   data: RandomPhotosDataType | null;

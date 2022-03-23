@@ -20,7 +20,7 @@ const RandomPhotosContextProvider = ({ children }: { children: ReactNode }) => {
   const setLocalStorageData: setLocalStorageDataType = (photos) => {
     const d = {
       date: new Date(),
-      photos: photos
+      photos: Array.isArray(photos) ? photos : [photos]
     }
     localStorage.setItem('randomPhotos', JSON.stringify(d))
     setData(d)

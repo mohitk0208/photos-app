@@ -1,15 +1,14 @@
-// import PhotosContainer from "../PhotosContainer"
-// import { useSavedPhotos } from "../../context/SavedPhotosContext"
+import PhotosContainer from "../PhotosContainer"
+import { useSavedPhotos } from "../../context/SavedPhotosContext"
 
 
 const SavedPage = () => {
-  // const { data, photos, removeFromSavedPhotos } = useSavedPhotos()
+  const { data } = useSavedPhotos()
 
 
   return (
     <div className="" >
-      {/* <PhotosContainer photos={photos} loading={false} /> */}
-      Saved Photos
+      <PhotosContainer photos={data?.photos || []} loading={false} />
     </div>
   )
 }

@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef } from "react"
 
-const useTimeout = (callback, delay) => {
+const useTimeout = (callback: () => void, delay: number) => {
 
   const callbackRef = useRef(callback)
-  const timeoutRef = useRef()
+  const timeoutRef = useRef<number>()
 
   useEffect(() => {
 
@@ -34,8 +34,6 @@ const useTimeout = (callback, delay) => {
   }, [clear, set])
 
   return { reset, clear }
-
-
 }
 
 export default useTimeout

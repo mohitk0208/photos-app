@@ -1,12 +1,12 @@
 // import { useSavedPhotos } from "../../context/SavedPhotosContext"
 // import { BookmarkIcon } from "@heroicons/react/outline"
 
-import { PhotoType } from '../../types/photo'
+import { PhotoBasicType, PhotoType } from '../../types/photo'
 
 
 interface PhotoProps {
   onClick: () => void,
-  photo: PhotoType
+  photo: PhotoType | PhotoBasicType
 }
 
 const Photo = ({ photo, onClick }: PhotoProps) => {

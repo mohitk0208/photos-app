@@ -1,8 +1,14 @@
 import { useState } from "react"
+import { PhotoBasicType, PhotoType } from "../../types/photo";
 import PhotoModal from "../PhotoModal/PhotoModal"
 import Photo from "./Photo"
 
-const PhotosContainer = ({ photos, loading }) => {
+interface PhotosContainerProps {
+  photos: PhotoType[] | PhotoBasicType[];
+  loading: boolean;
+}
+
+const PhotosContainer = ({ photos, loading }: PhotosContainerProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(-1)
 
 

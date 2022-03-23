@@ -5,7 +5,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid"
 
 interface PhotoModalProps {
   show: boolean,
-  className: string,
+  className?: string,
   size?: "sm" | "md" | "lg" | "xl" | "2xl",
   currentImgUrl: string,
   onClose: () => void,
@@ -14,7 +14,7 @@ interface PhotoModalProps {
 }
 
 
-const PhotoModal = ({ size = "md", ...props }: PhotoModalProps) => {
+const PhotoModal = ({ size = "md", className = "", ...props }: PhotoModalProps) => {
 
   const MODAL_WIDTH = {
     "sm": "max-w-md",
@@ -61,7 +61,7 @@ const PhotoModal = ({ size = "md", ...props }: PhotoModalProps) => {
             leaveTo="opacity-0 -translate-y-8 sm-translate-y-0 sm:scale-95"
           >
             <div className={`transition-all transform shadow-xl rounded-lg mx-auto max-h-[90vh] max-w-[80vw] align-middle`}>
-              <div className={`max-w-[80vw] h-[90vh] ${props.className}`}>
+              <div className={`max-w-[80vw] h-[90vh] ${className}`}>
                 <img className=' aspect-auto h-full object-contain select-none' src={props.currentImgUrl} />
               </div>
             </div>

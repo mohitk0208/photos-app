@@ -1,5 +1,5 @@
 import { useSavedPhotos } from "../../context/SavedPhotosContext"
-import { BookmarkIcon } from "@heroicons/react/outline"
+import { BookmarkIcon, ArrowCircleDownIcon } from "@heroicons/react/outline"
 import { PhotoBasicType, PhotoType } from '../../types/photo'
 
 
@@ -24,11 +24,13 @@ const Photo = ({ photo, onClick }: PhotoProps) => {
 
 
   return (
-    <div className="w-full aspect-square bg-gray-400 rounded-sm cursor-pointer overflow-hidden relative" onClick={onClick} >
-      <img className="w-full h-full hover:scale-110 transition-transform duration-200 ease-in-out object-cover" src={photo.urls.regular} alt="" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 pointer-events-none" ></div>
+    <div className="w-full aspect-square bg-gray-400 rounded-sm cursor-pointer overflow-hidden relative group" onClick={onClick} >
+      <img className="w-full h-full group-hover:scale-110 transition-transform duration-200 ease-in-out object-cover" src={photo.urls.regular} alt="" />
+      <div className=" flex items-end justify-end gap-2 pb-2 pr-2 absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 " >
+        <ArrowCircleDownIcon className={`w-6 h-6 stroke-1 stroke-slate-50 hover:text-slate-100`} />
+        <BookmarkIcon className={`w-6 h-6 ${isPhotoSaved(photo.id) ? " fill-yellow-500 stroke-black" : "fill-transparent stroke-slate-50"} stroke-1  `} onClick={handleBookmarkClick} />
+      </div>
 
-      <BookmarkIcon className={`w-6 h-6 ${isPhotoSaved(photo.id) ? " fill-yellow-500 stroke-black" : "fill-transparent stroke-slate-50"} stroke-1  absolute bottom-1 right-1`} onClick={handleBookmarkClick} />
     </div>
   )
 }

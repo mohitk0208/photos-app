@@ -25,6 +25,7 @@ const HomePage = () => {
 
       api.photos.getRandom({
         count: 30,
+        orientation: "landscape",
       }).then(res => {
         setLocalStorageData(res.response as PhotoType | PhotoType[] || [])
       })
@@ -40,6 +41,7 @@ const HomePage = () => {
     setLoading(true)
     api.photos.getRandom({
       count: 30,
+      orientation: "landscape",
     }).then(res => {
       setLocalStorageData(res.response as PhotoType | PhotoType[] || [])
       setLoading(false)

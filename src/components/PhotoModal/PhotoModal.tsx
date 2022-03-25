@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid"
 
 
@@ -23,6 +23,23 @@ const PhotoModal = ({ size = "md", className = "", ...props }: PhotoModalProps) 
     "xl": "max-w-2xl",
     "2xl": "max-w-3xl"
   }
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    switch (e.key) {
+      case "ArrowRight": props.onNextClick(); break;
+      case "ArrowLeft": props.onPrevClick(); break;
+      case "Escape": props.onClose(); break;
+      default: break;
+    }
+  }
+
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown)
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [props.currentImgUrl])
 
 
   return (

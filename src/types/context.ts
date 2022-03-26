@@ -23,3 +23,19 @@ export interface savedPhotosContext {
   removePhoto: (photoId: string) => void;
   isPhotoSaved: (photoId: string) => boolean;
 }
+
+
+export type randomPhotosCount = 5 | 10 | 15 | 20 | 25 | 30
+export type randomPhotoOrientation = 'landscape' | 'portrait' | 'squarish'
+
+export interface SettingsType {
+  isDarkMode: boolean;
+  randomPhotosCount: randomPhotosCount;
+  randomPhotoOrientation?: randomPhotoOrientation;
+}
+
+export interface settingsContext {
+  settings: SettingsType;
+  setIsDarkMode: (isDarkMode: boolean) => void;
+  setRandomPhotosCount: (randomPhotosCount: randomPhotosCount) => void;
+}

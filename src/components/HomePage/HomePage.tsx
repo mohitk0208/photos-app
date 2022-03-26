@@ -4,6 +4,7 @@ import { createApi } from "unsplash-js"
 import { useRandomPhotosContext } from "../../context/RandomPhotosContext"
 import { RefreshIcon } from "@heroicons/react/solid"
 import { PhotoType } from "../../types/photo"
+import { useSettings } from "../../context/SettingsContext"
 
 const api = createApi({
   accessKey: import.meta.env.VITE_UNSPLASH_ACCESS_KEY,
@@ -15,6 +16,7 @@ const HomePage = () => {
   const [photos, setPhotos] = useState<PhotoType[]>([])
   const [loading, setLoading] = useState(false)
   const { data, setLocalStorageData } = useRandomPhotosContext()
+  const { settings } = useSettings()
 
   useEffect(() => {
 
@@ -22,13 +24,7 @@ const HomePage = () => {
       setPhotos(data.photos)
 
     } else {
-
-      api.photos.getRandom({
-        count: 30,
-        orientation: "landscape",
-      }).then(res => {
-        setLocalStorageData(res.response as PhotoType | PhotoType[] || [])
-      })
+      getNewRandomPhotos()
     }
 
   }, [])
@@ -37,11 +33,11 @@ const HomePage = () => {
     if (data) setPhotos(data.photos)
   }, [data])
 
-  const refreshClickHandler = () => {
+  const getNewRandomPhotos = () => {
     setLoading(true)
     api.photos.getRandom({
-      count: 30,
-      orientation: "landscape",
+      count: settings.randomPhotosCount,
+      orientation: settings.randomPhotoOrientation,
     }).then(res => {
       setLocalStorageData(res.response as PhotoType | PhotoType[] || [])
       setLoading(false)
@@ -52,7 +48,7 @@ const HomePage = () => {
   return (
     <div className="" >
       <div className="flex justify-end">
-        <button className="flex item-center justify-center gap-1 py-2 px-4 border rounded-full hover:bg-gray-200 transition-colors duration-200 ease-in-out mb-1 " disabled={loading} onClick={refreshClickHandler} >
+        <button className="flex item-center justify-center gap-1 py-2 px-4 border rounded-full hover:bg-gray-200 transition-colors duration-200 ease-in-out mb-1 " disabled={loading} onClick={getNewRandomPhotos} >
           <span>Refresh</span>
           <RefreshIcon className="w-6 h-6 text-blue-600" />
         </button>

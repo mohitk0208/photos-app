@@ -19,7 +19,7 @@ export type setRandomPhotosCountAction = {
 
 export type setRandomPhotosOrientation = {
   type: ActionTypes.SET_RANDOM_PHOTO_ORIENTATION;
-  payload?: typeof randomPhotoOrientationTypes[number];
+  payload: typeof randomPhotoOrientationTypes[number];
 }
 
 export type action = setIsDarkModeAction | setRandomPhotosCountAction | setRandomPhotosOrientation;

@@ -2,6 +2,8 @@ import { Dialog, Transition } from "@headlessui/react"
 import { Fragment } from "react"
 import { useSettings } from "../../context/SettingsContext"
 import DarkModeSwitch from "./DarkModeSwitch"
+import RandomPhotoOrientationSelect from "./RandomPhotoOrientationSelect"
+import RandomPhotosCountSelect from "./RandomPhotosCountSelect"
 
 interface SettingsModalProps {
   show: boolean,
@@ -11,9 +13,6 @@ interface SettingsModalProps {
 
 
 const SettingsModal = ({ className = "", ...props }: SettingsModalProps) => {
-
-  const { settings, setIsDarkMode } = useSettings()
-
 
   return (
     <Transition show={props.show} as={Fragment} >
@@ -53,6 +52,8 @@ const SettingsModal = ({ className = "", ...props }: SettingsModalProps) => {
             <div className={`transition-all transform shadow-xl rounded-lg mx-auto max-h-[90vh] w-96 max-w-[80vw] align-middle bg-white`}>
               <div className="bg-white px-5 py-3 rounded-lg" >
                 <DarkModeSwitch />
+                <RandomPhotosCountSelect />
+                <RandomPhotoOrientationSelect />
               </div>
             </div>
           </Transition.Child>

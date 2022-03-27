@@ -1,9 +1,9 @@
 import { Popover, Transition } from "@headlessui/react";
 import { ArrowCircleDownIcon } from "@heroicons/react/outline";
 import { Fragment, MouseEventHandler } from "react";
-import { PhotoBasicType, PhotoType, UrlTypes } from "../../types/photo";
+import { PhotoBasicType, PhotoType } from "../../types/photo";
 
-export const photoUrlTypes: UrlTypes[] = ["full", "raw", "regular", "small", "thumb"];
+export const photoUrlTypes = ["full", "raw", "regular", "small", "thumb"] as const;
 
 const DownloadPopover = ({ photo }: { photo: PhotoType | PhotoBasicType }) => {
 
@@ -12,7 +12,7 @@ const DownloadPopover = ({ photo }: { photo: PhotoType | PhotoBasicType }) => {
     console.log("Download button clicked");
   }
 
-  const download = (e: React.MouseEvent<HTMLAnchorElement>, href: string, type: UrlTypes) => {
+  const download = (e: React.MouseEvent<HTMLAnchorElement>, href: string, type: typeof photoUrlTypes[number]) => {
     console.log(href);
     fetch(href, {
       method: "GET",
@@ -51,7 +51,7 @@ const DownloadPopover = ({ photo }: { photo: PhotoType | PhotoBasicType }) => {
         <Popover.Panel className="absolute bottom-6 right-16 rounded-md overflow-hidden bg-gray-50 dark:bg-gray-600 dark:text-white ">
 
           {photoUrlTypes.map((val) => (
-            <a className="block px-4 py-1 focus:border-indigo-200 outline-none w-full focus:ring focus:ring-blue-300 hover:bg-slate-200 " onClick={(e) => download(e, photo.urls[val], val)} >
+            <a className="block px-4 py-1 focus:border-indigo-200 outline-none w-full focus:ring focus:ring-blue-300 hover:bg-slate-200 " onClick={(e) => download(e, photo.urls[val], val)} key={val}>
               {val}
             </a>
           ))}

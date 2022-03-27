@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useReducer } from "react"
-import { randomPhotoOrientation, randomPhotosCount, settingsContext, SettingsType } from "../types/context"
+import { setRandomPhotosOrientationType, setRandomPhotosCountType, settingsContext, SettingsType } from "../types/context"
 import { action, ActionTypes } from "../types/settingActions"
 
 
@@ -14,6 +14,7 @@ const initialContext: settingsContext = {
   settings: initialSettings,
   setIsDarkMode: () => { },
   setRandomPhotosCount: () => { },
+  setRandomPhotosOrientation: () => { }
 }
 
 const SettingsContext = createContext<settingsContext>(initialContext)
@@ -60,12 +61,12 @@ const SettingsProvider = ({ children }: { children: ReactNode }) => {
     dispatch({ type: ActionTypes.SET_DARK_MODE, payload: isDarkMode })
   }
 
-  const setRandomPhotosCount = (randomPhotosCount: randomPhotosCount) => {
+  const setRandomPhotosCount: setRandomPhotosCountType = (randomPhotosCount) => {
     localStorage.setItem("settings", JSON.stringify({ ...settings, randomPhotosCount }))
     dispatch({ type: ActionTypes.SET_RANDOM_PHOTOS_COUNT, payload: randomPhotosCount })
   }
 
-  const setRandomPhotoOrientation = (randomPhotoOrientation: randomPhotoOrientation) => {
+  const setRandomPhotosOrientation: setRandomPhotosOrientationType = (randomPhotoOrientation) => {
     localStorage.setItem("settings", JSON.stringify({ ...settings, randomPhotoOrientation }))
     dispatch({ type: ActionTypes.SET_RANDOM_PHOTO_ORIENTATION, payload: randomPhotoOrientation })
   }
@@ -87,6 +88,7 @@ const SettingsProvider = ({ children }: { children: ReactNode }) => {
     settings,
     setIsDarkMode,
     setRandomPhotosCount,
+    setRandomPhotosOrientation
   }
 
   return (

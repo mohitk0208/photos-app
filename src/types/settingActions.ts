@@ -1,4 +1,4 @@
-import { randomPhotoOrientation, randomPhotosCount } from "./context";
+import { randomPhotoOrientationTypes, randomPhotosCountTypes } from "./context";
 
 export enum ActionTypes {
   SET_DARK_MODE,
@@ -13,13 +13,13 @@ export type setIsDarkModeAction = {
 
 export type setRandomPhotosCountAction = {
   type: ActionTypes.SET_RANDOM_PHOTOS_COUNT;
-  payload: randomPhotosCount;
+  payload: typeof randomPhotosCountTypes[number];
 }
 
 
 export type setRandomPhotosOrientation = {
   type: ActionTypes.SET_RANDOM_PHOTO_ORIENTATION;
-  payload?: randomPhotoOrientation;
+  payload?: typeof randomPhotoOrientationTypes[number];
 }
 
 export type action = setIsDarkModeAction | setRandomPhotosCountAction | setRandomPhotosOrientation;

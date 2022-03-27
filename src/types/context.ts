@@ -25,17 +25,21 @@ export interface savedPhotosContext {
 }
 
 
-export type randomPhotosCount = 5 | 10 | 15 | 20 | 25 | 30
-export type randomPhotoOrientation = 'landscape' | 'portrait' | 'squarish'
+export const randomPhotosCountTypes = [5, 10, 15, 20, 25, 30] as const
+export const randomPhotoOrientationTypes = ['landscape', 'portrait', 'squarish'] as const
 
 export interface SettingsType {
   isDarkMode: boolean;
-  randomPhotosCount: randomPhotosCount;
-  randomPhotoOrientation?: randomPhotoOrientation;
+  randomPhotosCount: typeof randomPhotosCountTypes[number];
+  randomPhotoOrientation?: typeof randomPhotoOrientationTypes[number];
 }
 
+export type setIsDarkModeType = (isDarkMode: boolean) => void;
+export type setRandomPhotosCountType = (randomPhotosCount: typeof randomPhotosCountTypes[number]) => void;
+export type setRandomPhotosOrientationType = (randomPhotoOrientation: typeof randomPhotoOrientationTypes[number]) => void;
 export interface settingsContext {
   settings: SettingsType;
-  setIsDarkMode: (isDarkMode: boolean) => void;
-  setRandomPhotosCount: (randomPhotosCount: randomPhotosCount) => void;
+  setIsDarkMode: setIsDarkModeType;
+  setRandomPhotosCount: setRandomPhotosCountType;
+  setRandomPhotosOrientation: setRandomPhotosOrientationType
 }

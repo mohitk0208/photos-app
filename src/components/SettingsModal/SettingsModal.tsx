@@ -1,5 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react"
 import { Fragment } from "react"
+import { useSettings } from "../../context/SettingsContext"
+import DarkModeSwitch from "./DarkModeSwitch"
 
 interface SettingsModalProps {
   show: boolean,
@@ -9,6 +11,10 @@ interface SettingsModalProps {
 
 
 const SettingsModal = ({ className = "", ...props }: SettingsModalProps) => {
+
+  const { settings, setIsDarkMode } = useSettings()
+
+
   return (
     <Transition show={props.show} as={Fragment} >
       <Dialog
@@ -44,8 +50,10 @@ const SettingsModal = ({ className = "", ...props }: SettingsModalProps) => {
             leaveFrom="opacity-100 translate-y-0 scale-100"
             leaveTo="opacity-0 -translate-y-8 sm-translate-y-0 sm:scale-95"
           >
-            <div className={`transition-all transform shadow-xl rounded-lg mx-auto max-h-[90vh] max-w-[80vw] align-middle bg-white`}>
-              hi
+            <div className={`transition-all transform shadow-xl rounded-lg mx-auto max-h-[90vh] w-96 max-w-[80vw] align-middle bg-white`}>
+              <div className="bg-white px-5 py-3 rounded-lg" >
+                <DarkModeSwitch />
+              </div>
             </div>
           </Transition.Child>
 

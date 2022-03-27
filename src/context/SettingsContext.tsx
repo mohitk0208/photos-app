@@ -2,12 +2,16 @@ import { createContext, ReactNode, useContext, useEffect, useReducer } from "rea
 import { randomPhotoOrientation, randomPhotosCount, settingsContext, SettingsType } from "../types/context"
 import { action, ActionTypes } from "../types/settingActions"
 
+
+
+const initialSettings: SettingsType = {
+  isDarkMode: false,
+  randomPhotosCount: 20,
+  randomPhotoOrientation: undefined
+}
+
 const initialContext: settingsContext = {
-  settings: {
-    isDarkMode: false,
-    randomPhotosCount: 20,
-    randomPhotoOrientation: undefined
-  },
+  settings: initialSettings,
   setIsDarkMode: () => { },
   setRandomPhotosCount: () => { },
 }
@@ -76,7 +80,7 @@ const SettingsProvider = ({ children }: { children: ReactNode }) => {
     else {
       localStorage.setItem("settings", JSON.stringify(initialContext.settings))
     }
-  })
+  }, [])
 
 
   const value: settingsContext = {

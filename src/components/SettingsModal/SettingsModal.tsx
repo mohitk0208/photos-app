@@ -1,9 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react"
 import { Fragment } from "react"
 import { useSettings } from "../../context/SettingsContext"
+import { randomPhotoOrientationTypes, randomPhotosCountTypes } from "../../types/context"
+import Select from "../utilComponents/Select"
 import DarkModeSwitch from "./DarkModeSwitch"
-import RandomPhotoOrientationSelect from "./RandomPhotoOrientationSelect"
-import RandomPhotosCountSelect from "./RandomPhotosCountSelect"
 
 interface SettingsModalProps {
   show: boolean,
@@ -13,6 +13,8 @@ interface SettingsModalProps {
 
 
 const SettingsModal = ({ className = "", ...props }: SettingsModalProps) => {
+
+  const { settings, setRandomPhotosCount, setRandomPhotoOrientation } = useSettings();
 
   return (
     <Transition show={props.show} as={Fragment} >
@@ -36,10 +38,6 @@ const SettingsModal = ({ className = "", ...props }: SettingsModalProps) => {
             <Dialog.Overlay className="fixed inset-0 bg-black/40 transition-opacity" />
           </Transition.Child>
 
-          {/* This element is to trick the browser into centering the modal contents. */}
-          {/* <span className="inline-block h-screen align-middle" aria-hidden="true">
-            &#8203;
-          </span> */}
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -49,11 +47,22 @@ const SettingsModal = ({ className = "", ...props }: SettingsModalProps) => {
             leaveFrom="opacity-100 translate-y-0 scale-100"
             leaveTo="opacity-0 -translate-y-8 sm-translate-y-0 sm:scale-95"
           >
-            <div className={`transition-all transform shadow-xl rounded-lg mx-auto max-h-[90vh] w-96 max-w-[80vw] align-middle bg-white`}>
+            <div className={`transition-all transform shadow-xl rounded-lg mx-auto max-h-[90vh] w-[440px] max-w-[80vw] align-middle bg-white`}>
               <div className="bg-white px-5 py-3 rounded-lg" >
-                <DarkModeSwitch />
-                <RandomPhotosCountSelect />
-                <RandomPhotoOrientationSelect />
+                <div className="text-left text-2xl font-bold pb-2 border-b mb-2">
+                  Settings
+                </div>
+
+                <div className="flex flex-col gap-2 p-2" >
+
+                  <DarkModeSwitch />
+
+                  <Select<typeof randomPhotosCountTypes[number]> label="Random Photos Count" value={settings.randomPhotosCount} options={randomPhotosCountTypes} onChange={setRandomPhotosCount} />
+
+                  <Select<typeof randomPhotoOrientationTypes[number]> label="Random Photos Orientation" value={settings.randomPhotoOrientation} options={randomPhotoOrientationTypes} onChange={setRandomPhotoOrientation} />
+
+                </div>
+
               </div>
             </div>
           </Transition.Child>

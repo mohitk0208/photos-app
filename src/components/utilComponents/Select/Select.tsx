@@ -18,11 +18,11 @@ function Select<T>({ label, options, value, onChange }: SelectProps<T>) {
 
   return (
     <Listbox value={value} onChange={onChange}>
-      <div className="mt-1 flex items-center justify-between">
-        <p>
+      <div className="mt-1 flex items-center justify-between relative">
+        <p className="" >
           {label}
         </p>
-        <Listbox.Button className="relative py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
+        <Listbox.Button className="relative py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow md:min-w-[8rem] cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
           <span className="block truncate">{value}</span>
           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             <SelectorIcon
@@ -37,7 +37,7 @@ function Select<T>({ label, options, value, onChange }: SelectProps<T>) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options className="absolute top-full right-0 z-50 w-1/2 py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             {options.map((val) => (
               <Listbox.Option
                 key={val as Key}

@@ -1,9 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react"
-import { Fragment } from "react"
+import { Fragment, useState } from "react"
 import { useSettings } from "../../context/SettingsContext"
 import { randomPhotoOrientationTypes, randomPhotosCountTypes } from "../../types/context"
 import Select from "../utilComponents/Select"
-import DarkModeSwitch from "./DarkModeSwitch"
+// import DarkModeSwitch from "./DarkModeSwitch"
 
 interface SettingsModalProps {
   show: boolean,
@@ -11,10 +11,14 @@ interface SettingsModalProps {
   onClose: () => void,
 }
 
+const themeOptions = ["dark", "light"]
+
 
 const SettingsModal = ({ className = "", ...props }: SettingsModalProps) => {
 
   const { settings, setRandomPhotosCount, setRandomPhotoOrientation } = useSettings();
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "")
+
 
   return (
     <Transition show={props.show} as={Fragment} >
@@ -55,7 +59,20 @@ const SettingsModal = ({ className = "", ...props }: SettingsModalProps) => {
 
                 <div className="flex flex-col gap-2 p-2" >
 
-                  <DarkModeSwitch />
+                  <Select<string> label={"DarkMode"} value={theme} options={themeOptions} onChange={(val) => {
+                    switch (val) {
+                      case "dark":
+                        localStorage.setItem("theme", "dark")
+                        document.documentElement.classList.add("dark")
+                        setTheme("dark")
+                        break;
+                      case "light":
+                        localStorage.setItem("theme", "light")
+                        document.documentElement.classList.remove("dark")
+                        setTheme("light")
+                        break
+                    }
+                  }} />
 
                   <Select<typeof randomPhotosCountTypes[number]> label="Random Photos Count" value={settings.randomPhotosCount} options={randomPhotosCountTypes} onChange={setRandomPhotosCount} />
 

@@ -5,14 +5,12 @@ import { action, ActionTypes } from "../types/settingActions"
 
 
 const initialSettings: SettingsType = {
-  isDarkMode: false,
   randomPhotosCount: 20,
   randomPhotoOrientation: "landscape"
 }
 
 const initialContext: settingsContext = {
   settings: initialSettings,
-  setIsDarkMode: () => { },
   setRandomPhotosCount: () => { },
   setRandomPhotoOrientation: () => { }
 }
@@ -54,12 +52,7 @@ const settingsReducer = (state: SettingsType, action: action) => {
 
 const SettingsProvider = ({ children }: { children: ReactNode }) => {
 
-  const [settings, dispatch] = useReducer(settingsReducer, initialContext.settings)
-
-  const setIsDarkMode = (isDarkMode: boolean) => {
-    localStorage.setItem("settings", JSON.stringify({ ...settings, isDarkMode }))
-    dispatch({ type: ActionTypes.SET_DARK_MODE, payload: isDarkMode })
-  }
+  const [settings, dispatch] = useReducer(settingsReducer, getInitialSettings())
 
   const setRandomPhotosCount: setRandomPhotosCountType = (randomPhotosCount) => {
     localStorage.setItem("settings", JSON.stringify({ ...settings, randomPhotosCount }))
@@ -71,22 +64,19 @@ const SettingsProvider = ({ children }: { children: ReactNode }) => {
     dispatch({ type: ActionTypes.SET_RANDOM_PHOTO_ORIENTATION, payload: randomPhotoOrientation })
   }
 
-  useEffect(() => {
+  function getInitialSettings(): SettingsType {
     const settings = localStorage.getItem("settings")
     if (settings) {
       const parsedSettings = JSON.parse(settings)
-      setIsDarkMode(parsedSettings.isDarkMode)
-      setRandomPhotosCount(parsedSettings.randomPhotosCount)
+      return parsedSettings
     }
-    else {
-      localStorage.setItem("settings", JSON.stringify(initialContext.settings))
-    }
-  }, [])
+    localStorage.setItem("settings", JSON.stringify(initialSettings))
+    return initialSettings
+  }
 
 
   const value: settingsContext = {
     settings,
-    setIsDarkMode,
     setRandomPhotosCount,
     setRandomPhotoOrientation
   }

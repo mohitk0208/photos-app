@@ -35,7 +35,7 @@ const TabsContainer = () => {
         <div className="relative" >
           <CogIcon className="w-8 h-8 absolute top-5 right-10 cursor-pointer text-slate-600 hover:text-slate-900 transition-colors duration-200 ease-in-out" onClick={() => setIsSettingModalOpen(true)} />
         </div>
-        <Tab.List as="div" className=" w-full p-10 flex items-center justify-center gap-2 bg-gray-200 " >
+        <Tab.List as="div" className="w-full p-10 flex items-center justify-center gap-2 bg-gray-200 " >
           <CustomTab Icon={HomeIcon} name="Home" />
           <CustomTab Icon={SearchIcon} name="Search" />
           <CustomTab Icon={BookmarkIcon} name="Saved" />

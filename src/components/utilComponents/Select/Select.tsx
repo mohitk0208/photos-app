@@ -41,7 +41,7 @@ function Select<T>({ label, options, value, onChange }: SelectProps<T>) {
           <Listbox.Options className="absolute top-full right-0 z-50 w-1/2 py-0 mt-1 overflow-auto text-base bg-white dark:bg-slate-600 rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm transition-colors  duration-200 ease-in-out">
             {options.map((val) => (
               <Listbox.Option
-                key={val as Key}
+                key={val as unknown as Key}
                 className={({ active, selected }) =>
                   `cursor-default select-none relative py-2 pl-10 pr-4 transition-colors  duration-200 ease-in-out ${active ? 'text-lime-900 bg-lime-200/80' : 'text-lime-200'
                   } ${selected ? "bg-lime-300/80 text-lime-800" : "text-lime-600"}`

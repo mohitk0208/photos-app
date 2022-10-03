@@ -48,9 +48,9 @@ const HomePage = () => {
   return (
     <div className="" >
       <div className="flex justify-end">
-        <button className="flex item-center justify-center gap-1 py-2 px-4 border rounded-full hover:bg-gray-200 transition-colors duration-200 ease-in-out mb-1 " disabled={loading} onClick={getNewRandomPhotos} >
+        <button className="flex item-center justify-center gap-1 py-2 px-4 mb-5 border rounded-full hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-600  dark:text-lime-500 tracking-wide transition-colors duration-200 ease-in-out " disabled={loading} onClick={getNewRandomPhotos} >
           <span>Refresh</span>
-          <RefreshIcon className="w-6 h-6 text-blue-600" />
+          <RefreshIcon className="w-5 h-5 text-blue-600 dark:text-lime-500 " />
         </button>
       </div>
       <PhotosContainer photos={photos} loading={loading} />

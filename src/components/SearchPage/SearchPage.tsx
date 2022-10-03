@@ -27,9 +27,8 @@ const SearchPage = () => {
 
   return (
     <div>
-      <div className={`flex gap-2 items-center justify-center pb-5 `}>
-        <input type="text" className={` px-4 py-3 rounded-full border w-96 outline-none`} placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-        <button type="button" className={`px-5 py-3 rounded-full outline-none border bg-white`} onClick={() => null} > Search</button>
+      <div className={`flex gap-2 items-center justify-center pb-5`}>
+        <input type="text" className={`px-5 tracking-wide py-3 rounded-full border max-w-[400px] w-4/5 outline-none dark:bg-slate-800 dark:border-slate-700 dark:text-gray-50 transition-colors duration-200 ease-in-out`} placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
       </div>
       <PhotosContainer photos={searchResults} loading={loading} />
     </div>

@@ -15,7 +15,7 @@ const PhotosContainer = ({ photos, loading }: PhotosContainerProps) => {
 
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2" >
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 dark:bg-slate-900" >
       {loading ? (
         Array(30).fill(0).map((_, index) => (
           <div className="w-full aspect-square bg-gray-400 animate-pulse" key={index}>

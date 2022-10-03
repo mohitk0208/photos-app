@@ -51,9 +51,9 @@ const SettingsModal = ({ className = "", ...props }: SettingsModalProps) => {
             leaveFrom="opacity-100 translate-y-0 scale-100"
             leaveTo="opacity-0 -translate-y-8 sm-translate-y-0 sm:scale-95"
           >
-            <div className={`transition-all transform shadow-xl rounded-lg mx-auto max-h-[90vh] w-[440px] max-w-[80vw] align-middle bg-white`}>
-              <div className="bg-white px-5 py-3 rounded-lg" >
-                <div className="text-left text-2xl font-bold pb-2 border-b mb-2">
+            <div className={`transition-all transform shadow-xl rounded-lg mx-auto max-h-[90vh] w-[440px] max-w-[80vw] align-middle bg-white dark:bg-slate-800 dark:text-gray-50  `}>
+              <div className="bg-white dark:bg-slate-800  px-5 py-3 rounded-lg" >
+                <div className="text-left text-2xl font-bold pb-3 border-b border-lime-600 mb-2 text-lime-500 tracking-wide transition-colors duration-200 ease-in-out">
                   Settings
                 </div>
 

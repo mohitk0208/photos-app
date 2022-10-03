@@ -18,7 +18,7 @@ function App() {
     <SettingsProvider>
       <SavedPhotosContextProvider>
         <RandomPhotosContextProvider >
-          <div className="">
+          <div className="dark:bg-slate-800">
             <TabsContainer />
           </div>
         </RandomPhotosContextProvider>

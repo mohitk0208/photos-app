@@ -17,8 +17,8 @@ const CustomTab = ({ Icon, name }: CustomTabProps) => {
     <Tab>
       {({ selected }) => (
         <div className={`group cursor-pointer`}>
-          <Icon className={`w-20 aspect-square ${selected ? "text-gray-700" : "text-gray-500"}  block px-2 py-0 group-hover:text-gray-600 transition-colors duration-150 ease-in-out`} />
-          <p className={`text-sm ${selected ? "text-gray-800" : "text-gray-700"}  group-hover:text-gray-800 transition-colors duration-150 ease-in-out`} >{name}</p>
+          <Icon className={`w-20 aspect-square ${selected ? "text-gray-700 dark:text-lime-500" : "text-gray-500 dark:text-lime-800"}  block px-2 py-0 group-hover:text-gray-600 dark:group-hover:text-lime-700  transition-colors duration-150 ease-in-out`} />
+          <p className={`text-sm ${selected ? "text-gray-800 dark:text-lime-500" : "text-gray-700 dark:text-lime-800"}  group-hover:text-gray-800 dark:group-hover:text-lime-700 transition-colors duration-150 ease-in-out`} >{name}</p>
         </div>
       )}
     </Tab>
@@ -33,15 +33,15 @@ const TabsContainer = () => {
     <div className="">
       <Tab.Group as="div" >
         <div className="relative" >
-          <CogIcon className="w-8 h-8 absolute top-5 right-10 cursor-pointer text-slate-600 hover:text-slate-900 transition-colors duration-200 ease-in-out" onClick={() => setIsSettingModalOpen(true)} />
+          <CogIcon className="w-8 h-8 absolute top-5 right-10 cursor-pointer text-slate-600 dark:text-lime-600 hover:text-slate-900 transition-colors duration-200 ease-in-out" onClick={() => setIsSettingModalOpen(true)} />
         </div>
-        <Tab.List as="div" className="w-full p-10 flex items-center justify-center gap-2 bg-gray-200 " >
+        <Tab.List as="div" className="w-full p-10 flex items-center justify-center gap-2 bg-gray-200 dark:bg-slate-800 " >
           <CustomTab Icon={HomeIcon} name="Home" />
           <CustomTab Icon={SearchIcon} name="Search" />
           <CustomTab Icon={BookmarkIcon} name="Saved" />
         </Tab.List>
 
-        <Tab.Panels as="div" className="px-10 py-5 bg-gray-50 w-full h-full">
+        <Tab.Panels as="div" className="px-10 py-5 bg-gray-50 dark:bg-slate-900 w-full h-full transition-colors duration-200 ease-in-out">
           <Tab.Panel className="">
             <HomePage />
           </Tab.Panel>
